@@ -1,0 +1,21 @@
+<ion-view view-title="Settings">
+  <ion-content>
+    <ion-list>
+    <ion-toggle  ng-model="settings.facebook">
+        Facebook
+    </ion-toggle>
+    <ion-toggle  ng-model="settings.tumblr">
+        Tumblr
+    </ion-toggle>
+    <ion-toggle  ng-model="settings.instagram">
+        Instagram
+    </ion-toggle>
+    <div class="list">
+        <label class="item item-input item-stacked-label">
+            <span class="input-label">Tags</span>
+            <input type="text" placeholder="tag" name="tag">
+        </label>
+    </div>
+    </ion-list>
+  </ion-content>
+</ion-view>
