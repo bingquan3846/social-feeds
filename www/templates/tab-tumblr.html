@@ -1,0 +1,19 @@
+<ion-view view-title="Tumblr">
+    <ion-content>
+        <ion-list>
+            <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="feed in feeds" type="item-text-wrap" href="{{feed.post_url}}" >
+                <h2>{{feed.blog_name}}</h2>
+                <p>
+                    {{feed.caption|htmlToPlaintext}}
+                    {{feed.body}}
+                </p>
+                <img src="{{feed.photos[0].original_size.url}}"  width="200px"/>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+
+                <ion-option-button class="button-assertive" ng-click="remove(chat)">
+                    Delete
+                </ion-option-button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.filters'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -95,10 +95,28 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
               controller: 'FacebookDetailCtrl'
           }
       }
-  });
+  })
+      .state('tab.tumblr', {
+          url: '/tumblr',
+          views: {
+              'tab-tumblr': {
+                  templateUrl: 'templates/tab-tumblr.html',
+                  controller: 'TumblrCtrl'
+              }
+          }
+      })
+      .state('tab.tumblr-detail', {
+          url: '/tumblr/:chatId',
+          views: {
+              'tab-tumblr': {
+                  templateUrl: 'templates/tumblr-detail.html',
+                  controller: 'TumblrDetailCtrl'
+              }
+          }
+      });
 
 
-  // if none of the above states are matched, use this as the fallback
+        // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');
 
 });

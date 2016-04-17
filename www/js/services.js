@@ -47,4 +47,27 @@ angular.module('starter.services', [])
       return null;
     }
   };
-});
+})
+    .factory('TumblrFeeds', function ($http) {
+      return{
+        getFeedsFromTag : function(tag) {
+          return $http({
+            url: 'https://api.tumblr.com/v2/tagged?tag='+tag+'&api_key=fuiKNFp9vQFvjLNvx4sUwti4Yb5yGutBN4Xh10LXZhhRKjWlV4',
+            method: 'GET'
+          })
+        }
+      }
+    })
+    .factory('Scopes', function () {
+      var mem = {};
+
+      return {
+        store: function (key, value) {
+          mem[key] = value;
+        },
+        get: function (key) {
+          return mem[key];
+        }
+      };
+    });
+

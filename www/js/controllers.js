@@ -32,8 +32,18 @@ angular.module('starter.controllers', [])
     $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('AccountCtrl', function($scope) {
+.controller('TumblrCtrl', function($scope, TumblrFeeds) {
+
+    TumblrFeeds.getFeedsFromTag('dog').success(function(data){
+        $scope.feeds = data.response;
+        console.log($scope.settings);
+    });
+
+})
+
+.controller('AccountCtrl', function($scope, Scopes) {
   $scope.settings = {
     enableFriends: true
   };
+    console.log($scope);
 });
