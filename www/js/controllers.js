@@ -32,18 +32,30 @@ angular.module('starter.controllers', [])
     $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('TumblrCtrl', function($scope, TumblrFeeds) {
-
-    TumblrFeeds.getFeedsFromTag('dog').success(function(data){
+.controller('TumblrCtrl', function($scope, $window,  TumblrFeeds) {
+    var tag = $window.localStorage['tag'] ? $window.localStorage['tag'] : 'dog';
+    TumblrFeeds.getFeedsFromTag(tag).success(function(data){
         $scope.feeds = data.response;
         console.log($scope.settings);
     });
 
 })
 
-.controller('AccountCtrl', function($scope, Scopes) {
-  $scope.settings = {
-    enableFriends: true
-  };
-    console.log($scope);
+.controller('AccountCtrl', function($scope, $window, HandleTabs) {
+
+    $scope.settings = {
+        facebook: JSON.parse($window.localStorage['facebook']) ? JSON.parse($window.localStorage['facebook'])  : false,
+        tumblr : JSON.parse($window.localStorage['tumblr']) ? JSON.parse($window.localStorage['tumblr']) :false,
+        instagram  : JSON.parse($window.localStorage['instagram']) ? JSON.parse($window.localStorage['instagram']) : false,
+        tag  : $window.localStorage['tag'] ? $window.localStorage['tag'] : ''
+    };
+    HandleTabs.toggle($scope.settings);
+    $scope.onChange = function(){
+        $window.localStorage['facebook'] =  $scope.settings.facebook;
+        $window.localStorage['tumblr'] =  $scope.settings.tumblr;
+        $window.localStorage['instagram'] =  $scope.settings.instagram;
+        $window.localStorage['tag'] =  $scope.settings.tag;
+        HandleTabs.toggle($scope.settings);
+
+    };
 });

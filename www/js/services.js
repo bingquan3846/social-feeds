@@ -48,26 +48,38 @@ angular.module('starter.services', [])
     }
   };
 })
-    .factory('TumblrFeeds', function ($http) {
-      return{
-        getFeedsFromTag : function(tag) {
-          return $http({
-            url: 'https://api.tumblr.com/v2/tagged?tag='+tag+'&api_key=fuiKNFp9vQFvjLNvx4sUwti4Yb5yGutBN4Xh10LXZhhRKjWlV4',
-            method: 'GET'
-          })
-        }
-      }
-    })
-    .factory('Scopes', function () {
-      var mem = {};
+.factory('TumblrFeeds', function ($http) {
+  return{
+    getFeedsFromTag : function(tag) {
+      return $http({
+        url: 'https://api.tumblr.com/v2/tagged?tag='+tag+'&api_key=fuiKNFp9vQFvjLNvx4sUwti4Yb5yGutBN4Xh10LXZhhRKjWlV4',
+        method: 'GET'
+      })
+    }
+  }
+})
+.factory('HandleTabs', function (){
+   return {
+       toggle : function($settings){
+           var tabs = angular.element(document.querySelectorAll( '.tab-nav.tabs a' ));
 
-      return {
-        store: function (key, value) {
-          mem[key] = value;
-        },
-        get: function (key) {
-          return mem[key];
-        }
-      };
-    });
+           if($settings.facebook){
+               angular.element(tabs[1]).css('display', 'block');
+           }else{
+               angular.element(tabs[1]).css('display', 'none');
+           }
+
+           if($settings.tumblr){
+               angular.element(tabs[2]).css('display', 'block');
+           }else{
+               angular.element(tabs[2]).css('display', 'none');
+           }
+           if($settings.instagram){
+               angular.element(tabs[3]).css('display', 'block');
+           }else{
+               angular.element(tabs[3]).css('display', 'none');
+           }
+       }
+   }
+});
 

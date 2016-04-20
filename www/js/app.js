@@ -76,7 +76,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         templateUrl: 'templates/tab-account.html',
         controller: 'AccountCtrl'
       }
-    }
+    },
+    cache: false
   })
   .state('tab.facebook', {
       url: '/facebook',
@@ -103,7 +104,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                   templateUrl: 'templates/tab-tumblr.html',
                   controller: 'TumblrCtrl'
               }
-          }
+          },
+          cache: false
       })
       .state('tab.tumblr-detail', {
           url: '/tumblr/:chatId',
