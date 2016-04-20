@@ -36,19 +36,40 @@ angular.module('starter.controllers', [])
     var tag = $window.localStorage['tag'] ? $window.localStorage['tag'] : 'dog';
     TumblrFeeds.getFeedsFromTag(tag).success(function(data){
         $scope.feeds = data.response;
-        console.log($scope.settings);
+    });
+
+    $scope.doRefresh = function(){
+
+        TumblrFeeds.getFeedsFromTag(tag)
+            .success(function(data){
+                $scope.feeds = data.response;
+            })
+            .finally(function(){
+                $scope.$broadcast('scroll.refreshComplete');
+            });
+    }
+
+})
+.controller('InstagramCtrl', function($scope, $window,  InstagramFeeds) {
+    var tag = $window.localStorage['tag'] ? $window.localStorage['tag'] : 'dog';
+    InstagramFeeds.getFeedsFromTag(tag).success(function(data){
+        $scope.feeds = data.response;
+        console.log($scope.feeds);
     });
 
 })
-
 .controller('AccountCtrl', function($scope, $window, HandleTabs) {
 
+    var facebook = $window.localStorage['facebook'] ? JSON.parse($window.localStorage['facebook']) : false;
+    var tumblr = $window.localStorage['tumblr'] ? JSON.parse($window.localStorage['tumblr']) : false;
+    var instagram = $window.localStorage['instagram'] ? JSON.parse($window.localStorage['instagram']) : false;
     $scope.settings = {
-        facebook: JSON.parse($window.localStorage['facebook']) ? JSON.parse($window.localStorage['facebook'])  : false,
-        tumblr : JSON.parse($window.localStorage['tumblr']) ? JSON.parse($window.localStorage['tumblr']) :false,
-        instagram  : JSON.parse($window.localStorage['instagram']) ? JSON.parse($window.localStorage['instagram']) : false,
+        facebook: facebook,
+        tumblr: tumblr,
+        instagram : instagram,
         tag  : $window.localStorage['tag'] ? $window.localStorage['tag'] : ''
     };
+
     HandleTabs.toggle($scope.settings);
     $scope.onChange = function(){
         $window.localStorage['facebook'] =  $scope.settings.facebook;

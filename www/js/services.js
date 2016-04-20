@@ -52,7 +52,17 @@ angular.module('starter.services', [])
   return{
     getFeedsFromTag : function(tag) {
       return $http({
-        url: 'https://api.tumblr.com/v2/tagged?tag='+tag+'&api_key=fuiKNFp9vQFvjLNvx4sUwti4Yb5yGutBN4Xh10LXZhhRKjWlV4',
+        url: 'https://api.tumblr.com/v2/tagged?tag=' + tag + '&api_key=fuiKNFp9vQFvjLNvx4sUwti4Yb5yGutBN4Xh10LXZhhRKjWlV4',
+        method: 'GET'
+      })
+    }
+  }
+})
+.factory('InstagramFeeds', function ($http) {
+  return{
+    getFeedsFromTag : function(tag) {
+      return $http({
+        url: 'https://api.instagram.com/v1/tags/' + tag + '?access_token=2964157534.ed4149d.2ae7c83ddf08449c844ba76345a2e4c6',
         method: 'GET'
       })
     }

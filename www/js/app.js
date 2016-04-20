@@ -115,6 +115,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                   controller: 'TumblrDetailCtrl'
               }
           }
+      })
+
+      .state('tab.instagram', {
+          url: '/instagram',
+          views: {
+              'tab-instagram': {
+                  templateUrl: 'templates/tab-instagram.html',
+                  controller: 'InstagramCtrl'
+              }
+          },
+          cache: false
       });
 
 

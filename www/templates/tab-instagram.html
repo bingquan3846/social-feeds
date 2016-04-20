@@ -1,9 +1,5 @@
-<ion-view view-title="Tumblr">
-    <ion-content ng-controller="TumblrCtrl">
-        <ion-refresher
-                pulling-text="Pull to refresh..."
-                on-refresh="doRefresh()">
-        </ion-refresher>
+<ion-view view-title="Instagram">
+    <ion-content>
         <ion-list>
             <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="feed in feeds" type="item-text-wrap" href="{{feed.post_url}}" >
                 <h2>{{feed.blog_name}}</h2>
