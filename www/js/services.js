@@ -73,18 +73,18 @@ angular.module('starter.services', [])
        toggle : function($settings){
            var tabs = angular.element(document.querySelectorAll( '.tab-nav.tabs a' ));
 
-           if($settings.facebook){
+           if(Number($settings.facebook) ){
                angular.element(tabs[1]).css('display', 'block');
            }else{
                angular.element(tabs[1]).css('display', 'none');
            }
 
-           if($settings.tumblr){
+           if(Number($settings.tumblr)){
                angular.element(tabs[2]).css('display', 'block');
            }else{
                angular.element(tabs[2]).css('display', 'none');
            }
-           if($settings.instagram){
+           if(Number($settings.instagram)){
                angular.element(tabs[3]).css('display', 'block');
            }else{
                angular.element(tabs[3]).css('display', 'none');

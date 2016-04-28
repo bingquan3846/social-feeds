@@ -1,6 +1,8 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {})
+.controller('DashCtrl', function($scope, $window, HandleTabs) {
+        HandleTabs.toggle($window.localStorage);
+ })
 
 .controller('ChatsCtrl', function($scope, Chats) {
   // With the new view caching in Ionic, Controllers are only called
@@ -60,9 +62,9 @@ angular.module('starter.controllers', [])
 })
 .controller('AccountCtrl', function($scope, $window, HandleTabs) {
 
-    var facebook = $window.localStorage['facebook'] ? JSON.parse($window.localStorage['facebook']) : false;
-    var tumblr = $window.localStorage['tumblr'] ? JSON.parse($window.localStorage['tumblr']) : false;
-    var instagram = $window.localStorage['instagram'] ? JSON.parse($window.localStorage['instagram']) : false;
+    var facebook = $window.localStorage['facebook'] == '1' ? true : false;
+    var tumblr = $window.localStorage['tumblr'] == '1' ? true : false;
+    var instagram = $window.localStorage['instagram'] == '1' ? true : false;
     $scope.settings = {
         facebook: facebook,
         tumblr: tumblr,
@@ -72,9 +74,9 @@ angular.module('starter.controllers', [])
 
     HandleTabs.toggle($scope.settings);
     $scope.onChange = function(){
-        $window.localStorage['facebook'] =  $scope.settings.facebook;
-        $window.localStorage['tumblr'] =  $scope.settings.tumblr;
-        $window.localStorage['instagram'] =  $scope.settings.instagram;
+        $window.localStorage['facebook'] =  $scope.settings.facebook ? 1 : 0;
+        $window.localStorage['tumblr'] =  $scope.settings.tumblr ? 1 : 0;
+        $window.localStorage['instagram'] =  $scope.settings.instagram ? 1 : 0;
         $window.localStorage['tag'] =  $scope.settings.tag;
         HandleTabs.toggle($scope.settings);
 
