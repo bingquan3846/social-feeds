@@ -7,10 +7,11 @@
         <ion-list>
             <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="feed in feeds" type="item-text-wrap" href="{{feed.post_url}}" >
                 <h2>{{feed.blog_name}}</h2>
-                <p>
-                    {{feed.caption|htmlToPlaintext}}
-                    {{feed.body}}
-                </p>
+                <div ng-bind-html="feed.caption">
+                </div>
+                <div ng-bind-html="feed.body">
+                </div>
+
                 <img src="{{feed.photos[0].original_size.url}}"  width="200px"/>
                 <i class="icon ion-chevron-right icon-accessory"></i>
 
