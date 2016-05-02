@@ -50,9 +50,15 @@ angular.module('starter.services', [])
 })
 .factory('TumblrFeeds', function ($http) {
   return{
-    getFeedsFromTag : function(tag) {
+    getFeedsFromTag : function(tag, before) {
+      if(before){
+          url = 'https://api.tumblr.com/v2/tagged?tag=' + tag + '&before=' + before + '&api_key=fuiKNFp9vQFvjLNvx4sUwti4Yb5yGutBN4Xh10LXZhhRKjWlV4';
+      }else{
+          url = 'https://api.tumblr.com/v2/tagged?tag=' + tag + '&api_key=fuiKNFp9vQFvjLNvx4sUwti4Yb5yGutBN4Xh10LXZhhRKjWlV4';
+      }
+
       return $http({
-        url: 'https://api.tumblr.com/v2/tagged?tag=' + tag + '&api_key=fuiKNFp9vQFvjLNvx4sUwti4Yb5yGutBN4Xh10LXZhhRKjWlV4',
+        url: url,
         method: 'GET'
       })
     }

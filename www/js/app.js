@@ -104,8 +104,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                   templateUrl: 'templates/tab-tumblr.html',
                   controller: 'TumblrCtrl'
               }
-          },
-          cache: false
+          }
       })
       .state('tab.tumblr-detail', {
           url: '/tumblr/:url',

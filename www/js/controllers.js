@@ -36,20 +36,33 @@ angular.module('starter.controllers', [])
 
 .controller('TumblrCtrl', function($scope, $window,  TumblrFeeds) {
     var tag = $window.localStorage['tag'] ? $window.localStorage['tag'] : 'dog';
-    TumblrFeeds.getFeedsFromTag(tag).success(function(data){
-        $scope.feeds = data.response;
-    });
+    var before = '';
+    var feeds = [];
 
     $scope.doRefresh = function(){
-
         TumblrFeeds.getFeedsFromTag(tag)
             .success(function(data){
                 $scope.feeds = data.response;
+                feeds = $scope.feeds;
+                before = data.response[19].timestamp;
             })
             .finally(function(){
                 $scope.$broadcast('scroll.refreshComplete');
             });
     }
+
+    $scope.loadMoreData = function() {
+        TumblrFeeds.getFeedsFromTag(tag, before).success(function(data) {
+
+            for(var i=0; i < data.response.length; i++){
+                feeds.push(data.response[i]);
+            }
+            console.log(before);
+            $scope.feeds = feeds;
+            before = data.response[19].timestamp;
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+        });
+    };
 
 })
 
