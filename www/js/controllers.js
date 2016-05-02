@@ -40,6 +40,9 @@ angular.module('starter.controllers', [])
     var feeds = [];
 
     $scope.doRefresh = function(){
+        var tag = $window.localStorage['tag'] ? $window.localStorage['tag'] : 'dog';
+        var before = '';
+        var feeds = [];
         TumblrFeeds.getFeedsFromTag(tag)
             .success(function(data){
                 $scope.feeds = data.response;
@@ -51,26 +54,34 @@ angular.module('starter.controllers', [])
             });
     }
 
+    $scope.$on( "$ionicView.enter", function( scopes, states ) {
+        if( states.fromCache && states.stateName == "tab.tumblr" ) {
+            console.log($window.localStorage['tag']);
+        }
+    });
+
     $scope.loadMoreData = function() {
+        var tag = $window.localStorage['tag'] ? $window.localStorage['tag'] : 'dog';
         TumblrFeeds.getFeedsFromTag(tag, before).success(function(data) {
 
             for(var i=0; i < data.response.length; i++){
                 feeds.push(data.response[i]);
             }
-            console.log(before);
             $scope.feeds = feeds;
-            before = data.response[19].timestamp;
+
+            if(data.response.length == 20 ){
+                before = data.response[19].timestamp;
+            }
             $scope.$broadcast('scroll.infiniteScrollComplete');
         });
     };
 
-})
+    })
 
 .controller('TumblrDetailCtrl', function($scope, $stateParams, $window, $sce){
     $scope.trustSrc = function(src) {
         return $sce.trustAsResourceUrl(src);
     }
-        console.log($window);
      $scope.src = $window.decodeURIComponent($stateParams.url.replace(/_/g, '%2F'));
      $scope.height = $window.screen.height;
 })
