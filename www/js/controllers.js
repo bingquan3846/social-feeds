@@ -52,14 +52,16 @@ angular.module('starter.controllers', [])
     }
 
 })
-.controller('InstagramCtrl', function($scope, $window,  InstagramFeeds) {
-    var tag = $window.localStorage['tag'] ? $window.localStorage['tag'] : 'dog';
-    InstagramFeeds.getFeedsFromTag(tag).success(function(data){
-        $scope.feeds = data.response;
-        console.log($scope.feeds);
-    });
 
+.controller('TumblrDetailCtrl', function($scope, $stateParams, $window, $sce){
+    $scope.trustSrc = function(src) {
+        return $sce.trustAsResourceUrl(src);
+    }
+        console.log($window);
+     $scope.src = $window.decodeURIComponent($stateParams.url.replace(/_/g, '%2F'));
+     $scope.height = $window.screen.height;
 })
+
 .controller('AccountCtrl', function($scope, $window, HandleTabs) {
 
     var facebook = $window.localStorage['facebook'] == '1' ? true : false;

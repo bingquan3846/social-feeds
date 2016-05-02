@@ -5,7 +5,7 @@
                 on-refresh="doRefresh()">
         </ion-refresher>
         <ion-list>
-            <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="feed in feeds" type="item-text-wrap" href="{{feed.post_url}}" >
+            <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="feed in feeds" type="item-text-wrap" href="#/tab/tumblr/{{feed.post_url|escape}}" >
                 <h2>{{feed.blog_name}}</h2>
                 <div ng-bind-html="feed.caption">
                 </div>

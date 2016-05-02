@@ -108,13 +108,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           cache: false
       })
       .state('tab.tumblr-detail', {
-          url: '/tumblr/:chatId',
+          url: '/tumblr/:url',
           views: {
               'tab-tumblr': {
                   templateUrl: 'templates/tumblr-detail.html',
                   controller: 'TumblrDetailCtrl'
               }
-          }
+          },
+          cache :false
       })
 
       .state('tab.instagram', {
