@@ -34,10 +34,14 @@ angular.module('starter.controllers', [])
     $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('TumblrCtrl', function($scope, $window,  TumblrFeeds) {
+.controller('TumblrCtrl', function($scope, $window, $ionicScrollDelegate, TumblrFeeds) {
     var tag = $window.localStorage['tag'] ? $window.localStorage['tag'] : 'dog';
     var before = '';
     var feeds = [];
+
+    $scope.scrollTop = function() {
+        $ionicScrollDelegate.scrollTop();
+    };
 
     $scope.doRefresh = function(){
         var tag = $window.localStorage['tag'] ? $window.localStorage['tag'] : 'dog';
@@ -62,6 +66,7 @@ angular.module('starter.controllers', [])
 
     $scope.loadMoreData = function() {
         var tag = $window.localStorage['tag'] ? $window.localStorage['tag'] : 'dog';
+
         TumblrFeeds.getFeedsFromTag(tag, before).success(function(data) {
 
             for(var i=0; i < data.response.length; i++){

@@ -9730,3 +9730,9 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+.action-button {
+  position: absolute;
+  bottom: 50px;
+  right: 0px;
+  z-index: 9999; }
