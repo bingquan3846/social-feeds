@@ -68,7 +68,7 @@ angular.module('starter.services', [])
   return{
     getFeedsFromTag : function(tag) {
       return $http({
-        url: 'https://api.instagram.com/v1/tags/' + tag + '?access_token=2964157534.ed4149d.2ae7c83ddf08449c844ba76345a2e4c6',
+        url: 'https://api.instagram.com/v1/tags/' + tag + '/media/recent?access_token=1475780215.1677ed0.c266e65599b9469d8803c3cb6ee15c49',
         method: 'GET'
       })
     }
@@ -79,21 +79,16 @@ angular.module('starter.services', [])
        toggle : function($settings){
            var tabs = angular.element(document.querySelectorAll( '.tab-nav.tabs a' ));
 
-           if(Number($settings.facebook) ){
+           if(Number($settings.tumblr) ){
                angular.element(tabs[1]).css('display', 'block');
            }else{
                angular.element(tabs[1]).css('display', 'none');
            }
 
-           if(Number($settings.tumblr)){
+           if(Number($settings.instagram)){
                angular.element(tabs[2]).css('display', 'block');
            }else{
                angular.element(tabs[2]).css('display', 'none');
-           }
-           if(Number($settings.instagram)){
-               angular.element(tabs[3]).css('display', 'block');
-           }else{
-               angular.element(tabs[3]).css('display', 'none');
            }
        }
    }

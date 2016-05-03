@@ -23,15 +23,69 @@ angular.module('starter.controllers', [])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('FacebookCtrl', function($scope, Chats) {
-    $scope.chats = Chats.all();
-    $scope.remove = function(chat) {
-        Chats.remove(chat);
+.controller('InstagramCtrl', function($scope, $window, $http,  InstagramFeeds) {
+    var nextUrl = '';
+    var tag = $window.localStorage['tag'] ? $window.localStorage['tag'] : 'dog';
+    var feeds = [];
+    $scope.scrollTop = function() {
+        $ionicScrollDelegate.scrollTop();
+    };
+
+    $scope.doRefresh = function(){
+        var tag = $window.localStorage['tag'] ? $window.localStorage['tag'] : 'dog';
+        next_url = '';
+        feeds = [];
+        InstagramFeeds.getFeedsFromTag(tag)
+            .success(function(data){
+                $scope.feeds = data.data;
+                feeds = $scope.feeds;
+            })
+            .finally(function(){
+                $scope.$broadcast('scroll.refreshComplete');
+            });
+    }
+
+    $scope.$on( "$ionicView.enter", function( scopes, states ) {
+        if( states.fromCache && states.stateName == "tab.tumblr" ) {
+            console.log($window.localStorage['tag']);
+        }
+    });
+
+    $scope.loadMoreData = function() {
+        var tag = $window.localStorage['tag'] ? $window.localStorage['tag'] : 'dog';
+        if(nextUrl == ''){
+            InstagramFeeds.getFeedsFromTag(tag).success(function(data) {
+                $scope.feeds = data.data;
+                feeds =  data.data;
+                console.log(data.pagination);
+                nextUrl = data.pagination.next_url;
+
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+            });
+        }else{
+            $http({
+                url: nextUrl,
+                method: 'GET'
+            }).success(function(data) {
+                for(var i=0; i < data.data.length; i++){
+                    feeds.push(data.data[i]);
+                }
+                $scope.feeds = feeds;
+                nextUrl = data.pagination.next_url;
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+            });
+        }
+
+
     };
 })
 
-.controller('FacebookDetailCtrl', function($scope, $stateParams, Chats) {
-    $scope.chat = Chats.get($stateParams.chatId);
+.controller('InstagramDetailCtrl', function($scope, $stateParams, $window, $sce) {
+        $scope.trustSrc = function(src) {
+            return $sce.trustAsResourceUrl(src);
+        }
+        $scope.src = $window.decodeURIComponent($stateParams.url.replace(/_/g, '%2F'));
+        $scope.height = $window.screen.height;
 })
 
 .controller('TumblrCtrl', function($scope, $window, $ionicScrollDelegate, TumblrFeeds) {
@@ -92,12 +146,9 @@ angular.module('starter.controllers', [])
 })
 
 .controller('AccountCtrl', function($scope, $window, HandleTabs) {
-
-    var facebook = $window.localStorage['facebook'] == '1' ? true : false;
     var tumblr = $window.localStorage['tumblr'] == '1' ? true : false;
     var instagram = $window.localStorage['instagram'] == '1' ? true : false;
     $scope.settings = {
-        facebook: facebook,
         tumblr: tumblr,
         instagram : instagram,
         tag  : $window.localStorage['tag'] ? $window.localStorage['tag'] : ''
@@ -105,7 +156,6 @@ angular.module('starter.controllers', [])
 
     HandleTabs.toggle($scope.settings);
     $scope.onChange = function(){
-        $window.localStorage['facebook'] =  $scope.settings.facebook ? 1 : 0;
         $window.localStorage['tumblr'] =  $scope.settings.tumblr ? 1 : 0;
         $window.localStorage['instagram'] =  $scope.settings.instagram ? 1 : 0;
         $window.localStorage['tag'] =  $scope.settings.tag;

@@ -79,24 +79,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     },
     cache: false
   })
-  .state('tab.facebook', {
-      url: '/facebook',
-      views: {
-          'tab-facebook': {
-              templateUrl: 'templates/tab-facebook.html',
-              controller: 'FacebookCtrl'
-          }
-      }
-  })
-  .state('tab.facebook-detail', {
-      url: '/facebook/:chatId',
-      views: {
-          'tab-facebook': {
-              templateUrl: 'templates/facebook-detail.html',
-              controller: 'FacebookDetailCtrl'
-          }
-      }
-  })
       .state('tab.tumblr', {
           url: '/tumblr',
           views: {
@@ -124,8 +106,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                   templateUrl: 'templates/tab-instagram.html',
                   controller: 'InstagramCtrl'
               }
+          }
+      })
+      .state('tab.instagram-detail', {
+          url: '/instagram/:url',
+          views: {
+              'tab-instagram': {
+                  templateUrl: 'templates/instagram-detail.html',
+                  controller: 'InstagramDetailCtrl'
+              }
           },
-          cache: false
+          cache :false
       });
 
 
