@@ -1,41 +1,22 @@
 <ion-view view-title="About">
 
   <ion-content class="padding" ion-padding="40" >
-      <ion-checkbox ng-model="isChecked">Checkbox Label</ion-checkbox>
-      <ion-radio ng-model="choice" ng-value="'A'">Choose A</ion-radio>
-      <ion-radio ng-model="choice" ng-value="'B'">Choose B</ion-radio>
-      <ion-radio ng-model="choice" ng-value="'C'">Choose C</ion-radio>
-      <ion-toggle ng-model="airplaneMode" toggle-class="toggle-calm">Airplane Mode</ion-toggle>
-      <button on-drag="show()" class="button">Test</button>
-      <div class="hide-on-keyboard-open">
-          <div id="google-map">google</div>
+
+      <ion-checkbox ng-model="filter.tumblr">Tumblr</ion-checkbox>
+      <ion-checkbox ng-model="filter.instagram">Instagram</ion-checkbox>
+      <ion-checkbox ng-model="filter.facebook">Facebook</ion-checkbox>
+
+      <div class="card">
+          <div class="item item-text-wrap">
+              <p>{{author.firstname}} {{author.lastname}}</p>
+              <p>{{author.email}}</p>
+          </div>
       </div>
-      <ion-list ng-controller="TumblrCtrl"           show-delete="shouldShowDelete"
-                show-reorder="shouldShowReorder"
-                can-swipe="listCanSwipe">
-          <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="feed in feeds" type="item-text-wrap" href="#/tab/tumblr/{{feed.post_url|escape}}" >
-              <h2>{{feed.blog_name}}</h2>
-              <div ng-bind-html="feed.caption">
-              </div>
-              <div ng-bind-html="feed.body">
-              </div>
-
-              <img src="{{feed.photos[0].original_size.url}}"  width="200px"/>
-              <i class="icon ion-chevron-right icon-accessory"></i>
-
-          </ion-item>
-      </ion-list>
-      <a href="#" ng-click="openPopover()" class="button ">show</a>
-      <script id="my-popover.html" type="text/ng-template">
-          <ion-popover-view>
-              <ion-header-bar>
-                  <h1 class="title">My Popover Title</h1>
-              </ion-header-bar>
-              <ion-content>
-                  Hello!
-              </ion-content>
-          </ion-popover-view>
-      </script>
+      <div class="card">
+          <div class="item item-text-wrap">
+            <p>You can get feeds from instagram or tumblr according to tag (dog, cat, city), just pull down in the top to refresh the page or scrolling down to get more feeds. Enjoy it!</p>
+          </div>
+      </div>
   </ion-content>
 </ion-view>
 

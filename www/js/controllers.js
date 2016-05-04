@@ -2,6 +2,8 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope, $window, HandleTabs, $ionicActionSheet, $timeout, $ionicBackdrop, $ionicPopover) {
         HandleTabs.toggle($window.localStorage);
+        $scope.filter = {'tumblr' : true, 'instagram' : true, 'facebook' :false};
+        $scope.author = {'firstname' : 'BINGQUAN', 'lastname' : 'BAO', 'email' : 'bingquan.bao@gmail.com'};
     })
 
 .controller('ChatsCtrl', function($scope, Chats) {
