@@ -109,7 +109,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           }
       })
       .state('tab.instagram-detail', {
-          url: '/instagram/:url',
+          url: '/instagram/:id',
           views: {
               'tab-instagram': {
                   templateUrl: 'templates/instagram-detail.html',

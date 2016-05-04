@@ -71,6 +71,12 @@ angular.module('starter.services', [])
         url: 'https://api.instagram.com/v1/tags/' + tag + '/media/recent?access_token=1475780215.1677ed0.c266e65599b9469d8803c3cb6ee15c49',
         method: 'GET'
       })
+    },
+    getFeedById :function(id){
+        return $http({
+            url: 'https://api.instagram.com/v1/media/'+ id +'?access_token=1475780215.1677ed0.c266e65599b9469d8803c3cb6ee15c49',
+            method: 'GET'
+        })
     }
   }
 })

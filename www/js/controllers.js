@@ -1,8 +1,8 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope, $window, HandleTabs) {
+.controller('DashCtrl', function($scope, $window, HandleTabs, $ionicActionSheet, $timeout, $ionicBackdrop, $ionicPopover) {
         HandleTabs.toggle($window.localStorage);
- })
+    })
 
 .controller('ChatsCtrl', function($scope, Chats) {
   // With the new view caching in Ionic, Controllers are only called
@@ -57,7 +57,6 @@ angular.module('starter.controllers', [])
             InstagramFeeds.getFeedsFromTag(tag).success(function(data) {
                 $scope.feeds = data.data;
                 feeds =  data.data;
-                console.log(data.pagination);
                 nextUrl = data.pagination.next_url;
 
                 $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -80,12 +79,10 @@ angular.module('starter.controllers', [])
     };
 })
 
-.controller('InstagramDetailCtrl', function($scope, $stateParams, $window, $sce) {
-        $scope.trustSrc = function(src) {
-            return $sce.trustAsResourceUrl(src);
-        }
-        $scope.src = $window.decodeURIComponent($stateParams.url.replace(/_/g, '%2F'));
-        $scope.height = $window.screen.height;
+.controller('InstagramDetailCtrl', function($scope, $stateParams, InstagramFeeds) {
+        InstagramFeeds.getFeedById($stateParams.id).success(function(data){
+            $scope.feed = data.data;
+        });
 })
 
 .controller('TumblrCtrl', function($scope, $window, $ionicScrollDelegate, TumblrFeeds) {

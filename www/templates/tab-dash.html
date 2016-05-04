@@ -1,17 +1,42 @@
 <ion-view view-title="About">
+
   <ion-content class="padding" ion-padding="40" >
-      <ion-slide-box pager-click="slideHasChanged($index)">
-          <ion-slide>
-              <div>1
-      The views will be rendered in the irective below
-      Templates are in the /templates folder (but you could also
-      have templates inline in this html file if you'd like).</div>
-    </ion-slide>
-          <ion-slide><div>2
-      The views will be rendered in the directive below
-      Templates are in the /templates folder (but you could also
-      have templates inline in this html file if you'd like).</div>
-    </ion-slide>
-      </ion-slide-box>
+      <ion-checkbox ng-model="isChecked">Checkbox Label</ion-checkbox>
+      <ion-radio ng-model="choice" ng-value="'A'">Choose A</ion-radio>
+      <ion-radio ng-model="choice" ng-value="'B'">Choose B</ion-radio>
+      <ion-radio ng-model="choice" ng-value="'C'">Choose C</ion-radio>
+      <ion-toggle ng-model="airplaneMode" toggle-class="toggle-calm">Airplane Mode</ion-toggle>
+      <button on-drag="show()" class="button">Test</button>
+      <div class="hide-on-keyboard-open">
+          <div id="google-map">google</div>
+      </div>
+      <ion-list ng-controller="TumblrCtrl"           show-delete="shouldShowDelete"
+                show-reorder="shouldShowReorder"
+                can-swipe="listCanSwipe">
+          <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="feed in feeds" type="item-text-wrap" href="#/tab/tumblr/{{feed.post_url|escape}}" >
+              <h2>{{feed.blog_name}}</h2>
+              <div ng-bind-html="feed.caption">
+              </div>
+              <div ng-bind-html="feed.body">
+              </div>
+
+              <img src="{{feed.photos[0].original_size.url}}"  width="200px"/>
+              <i class="icon ion-chevron-right icon-accessory"></i>
+
+          </ion-item>
+      </ion-list>
+      <a href="#" ng-click="openPopover()" class="button ">show</a>
+      <script id="my-popover.html" type="text/ng-template">
+          <ion-popover-view>
+              <ion-header-bar>
+                  <h1 class="title">My Popover Title</h1>
+              </ion-header-bar>
+              <ion-content>
+                  Hello!
+              </ion-content>
+          </ion-popover-view>
+      </script>
   </ion-content>
 </ion-view>
+
+

@@ -4,8 +4,27 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<ion-view view-title="{{chat.name}}">
+<ion-view view-title="{{feed.user.username}}">
     <ion-content class="padding">
-        <iframe ng-src="{{trustSrc(src)}}"  style="width: 100%; min-height:{{height}}px"/>
+        <div class="list card">
+
+            <div class="item item-avatar">
+                <img src="{{feed.user.profile_picture}}">
+                <h2>{{feed.user.username}}</h2>
+                <p>{{feed.created_time * 1000 | date}}</p>
+            </div>
+
+            <div class="item item-body">
+                <img class="full-image" src="{{feed.images.standard_resolution.url}}">
+                <p>
+                    {{feed.caption.text}}
+                </p>
+                <p>
+                    <a href="#" class="subdued">{{feed.likes.count}} Like</a>
+                    <a href="#" class="subdued">{{feed.comments.count}} Comments</a>
+                </p>
+            </div>
+
+        </div>
     </ion-content>
 </ion-view>
