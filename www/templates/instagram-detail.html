@@ -6,11 +6,15 @@
 -->
 <ion-view view-title="{{feed.user.username}}">
     <ion-content class="padding">
+        <input value="{{feed.link}}" id="instagramUrl" style="display: none" >
+        <a class="button" href="#" onclick="window.open(document.getElementById('instagramUrl').value, '_system', 'location=yes'); return false;">
+            Open a Browser
+        </a>
         <div class="list card">
 
             <div class="item item-avatar">
                 <img src="{{feed.user.profile_picture}}">
-                <h2>{{feed.user.username}}</h2>
+                <h2><a href="http://www.instagram.com/{{feed.user.username}}" target="_blank"> {{feed.user.username}}</a></h2>
                 <p>{{feed.created_time * 1000 | date}}</p>
             </div>
 

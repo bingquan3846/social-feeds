@@ -6,6 +6,10 @@
 -->
 <ion-view view-title="{{chat.name}}">
   <ion-content class="padding">
+      <input value="{{src}}" id="tumblrUrl" style="display: none" >
+      <a class="button" href="#" onclick="window.open(document.getElementById('tumblrUrl').value, '_system', 'location=yes'); return false;">
+          Open a Browser
+      </a>
     <iframe ng-src="{{trustSrc(src)}}"  style="width: 100%; min-height:{{height}}px"/>
   </ion-content>
 </ion-view>
