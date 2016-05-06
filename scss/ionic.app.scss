@@ -27,3 +27,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   right: 0px;
   z-index: 9999;
 }
+
+.platform-android .action-button{
+  bottom:0px;
+}

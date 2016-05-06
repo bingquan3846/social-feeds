@@ -9736,3 +9736,6 @@ a.button {
   bottom: 50px;
   right: 0px;
   z-index: 9999; }
+
+.platform-android .action-button {
+  bottom: 0px; }
