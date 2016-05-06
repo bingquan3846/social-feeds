@@ -41,6 +41,7 @@ angular.module('starter.controllers', [])
             .success(function(data){
                 $scope.feeds = data.data;
                 feeds = $scope.feeds;
+                nextUrl = data.pagination.next_url;
             })
             .finally(function(){
                 $scope.$broadcast('scroll.refreshComplete');
