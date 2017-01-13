@@ -1,0 +1,28 @@
+<template name="App_body">
+    <div id="container" class="{{menuOpen}} {{cordova}}">
+        <section id="menu">
+            <div class="language-toggle">
+                {{#each language in languages}}
+                {{#if isActiveLanguage language}}
+                <span class="active">{{language}}</span>
+                {{else}}
+                <a href="#" class="js-toggle-language">{{language}}</a>
+                {{/if}}
+                {{/each}}
+            </div>
+        </section>
+
+        <div class="content-overlay"></div>
+
+        <div id="content-container">
+            {{#momentum plugin="fade"}}
+            {{#if Template.subscriptionsReady}}
+            {{> Template.dynamic template=main}}
+            {{else}}
+
+            {{/if}}
+            {{/momentum}}
+        </div>
+    </div>
+
+</template>
